@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node{
+    int data;
+    struct node* next;
+    struct node* next2;
+}node;
+node* create(node* head, int n){
+    node* temp=NULL;
+    node* p=NULL;
+    int i;
+    for(i=0;i<n;i++){
+        temp=(node*)malloc(sizeof(node));
+        printf("Enter all the sub-nodes: \n");
+        scanf("%d",&temp->data);
+        temp->next2=NULL;
+        p=head;
+        while(p->next2!=NULL)    p=p->next2;
+        p->next2=temp;
+    }
+}
+node* create_list(int n){
+    node* temp=NULL;
+    node* p=NULL;
+    node* head=NULL;
+    int i;
+    for(i=0;i<n;i++){
+        temp=(node*)malloc(sizeof(node));
+        printf("Enter the %d node: ",i+1);
+        scanf("%d",&temp->data);
+        temp->next=NULL;
+        if(head==NULL)  {head=temp; p=head;}
+        else{
+            p=head;
+            while(p->next!=NULL)    p=p->next;
+            p->next=temp;
+            p=p->next;
+        }
+        printf("How many sub-nodes you want?\n");
+        int n1;
+        scanf("%d",&n1);
+        p=create(temp,n1);
+    }
+    return head;
+}
+void display_mid(node* head,int n){
+    node* p = head;
+    node* p2=p;
+    while(p!=NULL){
+    p2=p;
+    while(p2!=NULL)  {printf("%d->",p2->data); p2=p2->next2;}
+    p=p->next;
+    }
+}
+int main(){
+    int n;
+    node* head= NULL;
+    printf("How many nodes do you want?\n");
+    scanf("%d",&n);
+    head= create_list(n);
+    display_mid(head,n);
+    return 0;
+}
