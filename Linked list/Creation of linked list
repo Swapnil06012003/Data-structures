@@ -9,8 +9,8 @@ node* create_list(int n){
     node* p=NULL;
     node* head=NULL;
     int i;
-    temp=(node*)malloc(sizeof(node));
     for(i=0;i<n;i++){
+        temp=(node*)malloc(sizeof(node));
         scanf("%d",&temp->data);
         temp->next=NULL;
         if(head==NULL)  head=temp;
@@ -22,9 +22,11 @@ node* create_list(int n){
     }
     return head;
 }
-void display(node* head){
-    node* p=head;
-    while(p!=NULL)    {printf("%d ",p->data); p=p->next;}
+void display(node* head,int n){
+    node* p = head;
+    while(p!=NULL){
+        printf("%d ",p->data);   p=p->next;
+    }
 }
 int main(){
     int n;
@@ -32,6 +34,6 @@ int main(){
     printf("How many nodes do you want?\n");
     scanf("%d",&n);
     head= create_list(n);
-    display(head);
+    display(head,n);
     return 0;
 }
