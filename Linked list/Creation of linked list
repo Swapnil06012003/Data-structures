@@ -22,7 +22,7 @@ node* create_list(int n){
     }
     return head;
 }
-void display(node* head,int n){
+void display(node* head){
     node* p = head;
     while(p!=NULL){
         printf("%d ",p->data);   p=p->next;
@@ -34,6 +34,6 @@ int main(){
     printf("How many nodes do you want?\n");
     scanf("%d",&n);
     head= create_list(n);
-    display(head,n);
+    display(head);
     return 0;
 }
