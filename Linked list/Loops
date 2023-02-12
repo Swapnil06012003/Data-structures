@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node{
+    int data;
+    struct node* next;
+}node;
+node * create_linkedlist(int n){
+    int i;
+    node*head=NULL;
+    node*temp=NULL;
+    node*p=NULL;
+    for(i=0;i<n;i++){
+        temp=(node*)malloc(sizeof(node));
+        printf("Enter the %d node: ",i+1);
+        scanf("%d",&(temp->data));
+        temp->next=NULL;
+        if(head==NULL)
+            head=temp;
+        else{
+            p=head;
+            while(p->next!=NULL)
+                p=p->next;
+            p->next = temp;
+        }
+    }
+    return head;
+}
+void display_list(node * head){
+    node * p = head;
+    while(p!=NULL){
+        printf("%d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+node * loop(node * head){
+    printf("Enter the starting aqnd ending positions of the loop: ");
+    int l1,l2,i;
+    scanf("%d %d",&l1,&l2);
+    node *p = head;
+    node *p1=NULL;
+    node *p2=NULL;
+    if(l1==0 && l2==0){
+        printf("returning with no loop formed\n");
+        return head;
+    }
+    for(i=1;i<=l2;i++){
+        if(i==l1)
+            p1=p;
+        if(i==l2)
+            p2=p;
+        p=p->next;
+        }
+    p2->next=p1;
+    return head;
+}
+node * remove_loop(node *head,int n){
+    node * p=NULL;
+    node *p1=head;
+    while(1){
+        int i;
+        p=p1->next;
+        for(i=0;i<n;i++){
+            if(p->next==p1){
+                p->next=NULL;
+                return head;
+            }
+            p=p->next;
+        }
+        p1=p1->next;
+    }
+}
+node * loop_detect(node * head,int n){
+    node *p=head;
+    node *pf=head->next;
+    node *ps=head;
+    while(1){
+        if(pf==ps){
+            printf("A loop has been detected\n");
+            return head=remove_loop(head,n);
+        }
+        if(pf==NULL || pf->next==NULL){
+            break;
+        }
+        ps=p->next;
+        pf=pf->next->next;
+    }
+    printf("No loop was detected\n");
+    return head;
+}
+
+int main(){
+    int n;
+    node *head=NULL;
+    printf("Enter the number of nodes you want: ");
+    scanf("%d",&n);
+    head=create_linkedlist(n);
+    display_list(head);
+    head = loop(head);
+    head = loop_detect(head,n);
+    display_list(head);
+    return 0;
+}
