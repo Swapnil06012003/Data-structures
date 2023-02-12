@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+    int data;
+    struct Node * next;
+}node;
+node * create(){
+    node *head=NULL;
+    node *temp=NULL;
+    node *p=NULL;
+    printf("Enter the number of nodes you want in linked list: ");
+    int n; scanf("%d",&n);
+    int i;
+    for(i=0;i<n;i++){
+        temp = (node *)malloc(sizeof(struct Node));
+        printf("Enter the %d node: ",i+1);
+        scanf("%d",&temp->data);
+        temp->next=NULL;
+        if(head==NULL)
+            head= temp;
+        else{
+            p=head;
+            while(p->next!=NULL)
+                p=p->next;
+            p->next=temp;
+        }
+    }
+    return head;
+}
+void display(node * head){
+    node * p= head;
+    while(p!=NULL){
+        printf("%d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+node * merge(node * head1 , node *head2){
+    node *head = NULL;
+    node *p1=head1;
+    node *p2=head2;
+    node * p =NULL;
+    node *temp=NULL;
+    while(p1!=NULL && p2!=NULL){
+        if(p1!=NULL){
+            temp=(node *)malloc(sizeof(struct Node));
+            temp->data=p1->data;
+            temp->next=NULL;
+            p1=p1->next;
+            if(head==NULL)
+            head= temp;
+            else{
+                p=head;
+                while(p->next!=NULL)
+                    p=p->next;
+                p->next=temp;
+            }
+        }
+        if(p2!=NULL){
+            temp=(node *)malloc(sizeof(struct Node));
+            temp->data=p2->data;
+            temp->next=NULL;
+            p2=p2->next;
+            if(head==NULL)
+            head= temp;
+            else{
+                p=head;
+                while(p->next!=NULL)
+                    p=p->next;
+                p->next=temp;
+            }
+        }
+    }
+    return head;
+}
+int main(){
+    node *head1=NULL;
+    head1 = create();
+    display(head1);
+    node *head2=NULL;
+    head2=create();
+    display(head2);
+    node * head3 = merge(head1,head2);
+    display(head3);
+    return 0;
+}
