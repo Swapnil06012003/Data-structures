@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+    int data;
+    struct Node *next;
+}node;
+node * create (){
+    node *head=NULL;
+    node *temp=NULL;
+    node *p=NULL;
+    int n,i;
+    printf("Enter thr number of nodes you want: ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++){
+        temp=(node *)malloc(sizeof(struct Node));
+        printf("Enter the %d node: ",i+1);
+        scanf("%d",&temp->data);
+        temp->next=NULL;
+        if(head==NULL)
+            head=temp;
+        else{
+            p=head;
+            while(p->next!=NULL)
+                p=p->next;
+            p->next=temp;
+        }
+    }
+    return head;
+}
+void display(node * head){
+    node *p=head;
+    while(p!=NULL){
+        printf("%d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+node * delete(node * head){
+    node *p = head;
+    printf("Enter the number after which you want the nodes to be deleted: ");
+    int n; scanf("%d",&n);
+    int i;
+    for(i=0;i<n-1;i++)
+        p=p->next;
+    printf("Enter the number of nodes you want to delete: ");
+    int m; scanf("%d",&m);
+    node *p2=p->next;
+    for(i=0;i<m;i++){
+        node * temp = p2;
+        p2=p2->next;
+        free(temp);
+    }
+    p->next=p2;
+    return head;
+}
+int main(){
+    node * head =NULL;
+    head = create();
+    display(head);
+    head=delete(head);
+    printf("After deleting nodes , the linked list is :\n");
+    display(head);
+    return 0;
+}
