@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+    int data;
+    struct Node *next;
+}node;
+node * create(){
+    node * head = NULL;
+    node * temp = NULL;
+    node * p =NULL;
+    printf("No. of nodes you want: ");
+    int n; scanf("%d",&n);
+    int i;
+    for(i=0;i<n;i++){
+        printf("Enter the %d node: ",i+1);
+        temp=(node *)malloc(sizeof(struct Node));
+        scanf("%d",&temp->data);
+        temp->next=NULL;
+        if(head==NULL)
+            head = temp;
+        else{
+            p=head;
+            while(p->next!=NULL)
+                p=p->next;
+            p->next=temp;
+        }
+    }
+    return head;
+}
+void display(node * head){
+    node *p=head;
+    while(p!=NULL){
+        printf("%d ",p->data);
+        p=p->next;}
+        printf("\n");
+}
+node * rotate(node * head){
+    printf("Enter the number of time you want to rotate the linked list: ");
+    int r; scanf("%d",&r);
+    int i=0;
+    for(i=0;i<r;i++){
+    node * p1 = head;
+    p1=p1->next;
+    node * p2=head;
+    while(p1->next!=NULL){
+        p1=p1->next;
+        p2=p2->next;}
+    p1->next = head;
+    p2->next=NULL;
+    head=p1;}
+    return head;
+}
+int main(){
+    node *head = NULL;
+    head=create();
+    display(head);
+    node * head2=rotate(head);
+    display(head2);
+    return 0;
+}
