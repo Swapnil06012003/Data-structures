@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+void check(string c, char s[], int n){
+    int top=-1;
+    for(int i=0;i<n;i++){
+        if(c[i]=='{'||c[i]=='['||c[i]=='('){++top;  s[top]=c[i];}
+        else if( (c[i]=='}'&& s[top]=='{') || (c[i]==')' && s[top]=='(') || (c[i]==']' && s[top]=='[')){
+            top--;
+        }
+        else if(c[i]=='}' || c[i]==']' || c[i]==')')    {cout<<"Not balanced";  return;}
+    }
+    if(top==-1){    cout<<"Balanced";   return;}
+    else {cout<<"Not balanced"; return;}
+}
+int main(){
+    string c;
+    cout<<"Enter a string: ";
+    cin>>c;
+    int n=c.length();
+    char s[n];
+    check(c,s,n);
+    return 0;
+}
