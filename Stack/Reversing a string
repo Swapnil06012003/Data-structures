@@ -1,0 +1,19 @@
+#include<bits/stdc++.h>
+using namespace std;
+string reverse(string c,int n){
+    stack<char> S;
+    for(int i=0;i<n;i++)    S.push(c[i]);
+    for(int i=0;i<n;i++){
+        c[i]=S.top();
+        S.pop();
+    }
+    return c;
+}
+int main(){
+    string c;
+    cout<<"Enter a string: ";
+    cin>>c;
+    c=reverse(c,c.length());
+    cout<<c;
+    return 0;
+}
