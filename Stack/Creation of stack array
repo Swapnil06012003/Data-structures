@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+int push(int arr[],int top){
+    int x;  cin>>x;
+    top++;
+    arr[top]=x;
+    return top;
+}
+int view(int arr[],int top){
+    return arr[top];
+}
+int pop(int arr[],int top){
+    return --top;
+}
+int main(){
+    int n;
+    cout<<"How many elements you want in stack: ";
+    cin>>n;
+    int arr[n],top=-1;
+    for(int i=0;i<n;i++)    top=push(arr,top);
+    cout<<"The top element is: "<<view(arr,top)<<endl;
+    cout<<"After poping the top element, the top is: ";
+    top=pop(arr,top);
+    cout<<view(arr,top);
+    return 0;
+}
