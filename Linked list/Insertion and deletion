@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+    int data;
+    struct Node *next;
+}node;
+node * create(int n){
+    node *head =NULL;
+    node * temp = NULL;
+    node *p=NULL;
+    int i;
+    for(i=0;i<n;i++){
+        printf("Enter the %d node: ",i+1);
+        temp = (node *)malloc(sizeof(node));
+        scanf("%d",&temp->data);
+        temp->next=NULL;
+        if(head==NULL)
+            head=temp;
+        else{
+            p=head;
+            while(p->next!=NULL)
+                p=p->next;
+            p->next=temp;
+        }
+    }
+    return head;
+}
+void display_list(node * head){
+    node * p = head;
+    while(p!=NULL){
+        printf("%d ",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+void delete (node *head,int x){
+    node *p1=head;
+    p1=p1->next;
+    node *p2=head;
+    if(p1==NULL && p2->data==x){ 
+        printf("No elements left in linked list");
+        free(head);
+        return;
+    }
+    else{
+        while(p1!=NULL){
+            if(p1->data==x){
+                p2->next = p1->next;
+                free(p1);
+                return;
+            }
+            p1=p1->next;
+            p2=p2->next;
+        }
+    }
+    printf("No element was found\n");
+    return;
+}
+node * insert (node * head , int n){
+    node *p = head;
+    while(p!=NULL){
+        if(p->data==n){
+            node * temp = (node *)malloc(sizeof(node));
+            printf("enter the data you wish to insert: ");
+            scanf("%d",&temp->data);
+            temp->next=p->next;
+            p->next= temp;
+            return head;
+        }
+        p=p->next;
+    }
+    printf("No such entry found in linked list\n");
+    return head;
+}
+int main(){
+    node *head = NULL;
+    int n;
+    printf("Enter the number of node you want: ");
+    scanf("%d",&n);
+    head=create(n);
+    display_list(head);
+    // printf("Enter the data you want to be deleted: ");
+    // int del;
+    // scanf("%d",&del);
+    // delete(head,del);
+    printf("After which node , would you like to insert a new element: ");
+    int ins;
+    scanf("%d",&ins);
+    head = insert(head,ins);
+    display_list(head);
+    return 0;
+}
