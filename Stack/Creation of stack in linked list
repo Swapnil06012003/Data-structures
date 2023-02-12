@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node{
+    int data;
+    struct node* next;
+}node;
+node* push(int n){
+    node* top=NULL;
+    node* temp=NULL;
+    int i;
+    for(i=0;i<n;i++){
+        temp=(node*)malloc(sizeof(node));
+        scanf("%d",&temp->data);
+        temp->next=top;
+        top=temp;
+    }
+    return top;
+}
+void view(node* top){
+    printf("%d\n",top->data);
+}
+node* pop(node* top){
+    node* temp=top;
+    top=top->next;
+    free(temp);
+    return top;
+}
+int main(){
+    int n;
+    printf("How many elements you want in stack: ");
+    scanf("%d",&n);
+    node* top=push(n);
+    printf("The top element is: ");
+    view(top);
+    printf("After poping the top element, the new top element is: ");
+    top=pop(top);
+    view(top);
+    return 0;
+}
