@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+    int data;
+    struct Node *next;
+}node;
+node * create(){
+    node * head = NULL;
+    node * temp = NULL;
+    node * p =NULL;
+    printf("No. of nodes you want: ");
+    int n; scanf("%d",&n);
+    int i;
+    for(i=0;i<n;i++){
+        printf("Enter the %d node: ",i+1);
+        temp=(node *)malloc(sizeof(struct Node));
+        scanf("%d",&temp->data);
+        temp->next=NULL;
+        if(head==NULL)
+            head = temp;
+        else{
+            p=head;
+            while(p->next!=NULL)
+                p=p->next;
+            p->next=temp;
+        }
+    }
+    return head;
+}
+void display(node * head){
+    node *p=head;
+    while(p!=NULL){
+        printf("%d ",p->data);
+        p=p->next;}
+        printf("\n");
+}
+node * swap(node *head){
+    int x,y;
+    printf("Enter the data you want to swap:\n");
+    scanf("%d %d",&x,&y);
+    node *px=NULL;
+    node *py=NULL;
+    node *prevx=NULL;
+    node *prevy=NULL;
+    node *p=head;
+    while(p!=NULL && p->data!=x){
+        prevx=p;
+        p=p->next;
+    }
+    px=p;
+    p=head;
+    while(p!=NULL && p->data!=y){
+        prevy=p;
+        p=p->next;
+    }
+    py=p;
+    node * temp;
+    temp=py->next;
+    py->next=px->next;
+    px->next=temp;
+    if(prevx==NULL){
+        py=head;
+        prevy->next=px;
+    }
+    if(prevy==NULL){
+        px=head;
+        prevx->next=prevy;
+    }
+    if(prevx!=NULL && prevy!=NULL){
+        prevx->next=py;
+        prevy->next=px;
+    }
+    return head;
+}
+int main(){
+    node *head = NULL;
+    head=create();
+    display(head);
+    head=swap(head);
+    printf("Linked list after swapping is : \n");
+    display(head);
+    return 0;
+}
