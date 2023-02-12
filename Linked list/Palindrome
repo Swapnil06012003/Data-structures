@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node{
+    char data;
+    struct Node * next;
+    struct Node * prev;
+}node;
+node * create(){
+    node * head=NULL;
+    node * temp = NULL;
+    node * p= NULL;
+    int i; 
+    printf("Enter the string or number you want: ");
+    while(1){
+        temp=(node *)malloc(sizeof(struct Node));
+        scanf("%c",&temp->data);
+        if(temp->data=='\n')
+            break;
+        temp->next=NULL;
+        temp->prev=NULL;
+        if(head==NULL)
+            head=temp;
+        
+        else{
+            p=head;
+            while(p->next!=NULL)
+                p=p->next;
+            temp->prev=p;
+            p->next=temp;
+        }
+    }
+    return head;
+}
+void check_palindrome(node *head){
+    node *p1=head;
+    node *p2=head;
+    while(p2->next!=NULL)
+        p2=p2->next;
+    while(1){
+        if(p1->data!=p2->data){
+            printf("Given data is not a palindrome\n");
+            return;
+        }
+        p1=p1->next;
+        p2=p2->prev;
+        if(p1==p2 || p1==NULL || p2==NULL)
+            break;
+    }
+    printf("Given data is palindrome\n");
+    return;
+}
+int main(){
+    node * head=NULL;
+    head=create();
+    check_palindrome(head);
+    return 0;
+}
