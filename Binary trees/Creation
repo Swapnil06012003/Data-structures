@@ -5,7 +5,7 @@ typedef struct node{
     struct node* right;
     struct node* left;
 }node;
-node* createtree(int n){
+node* createtree(){
     node*temp=NULL;
     node*p=NULL;
     node* root=NULL;
@@ -45,8 +45,8 @@ int main(){
     node* root=NULL;
     printf("Input -1 to end the element input\n");
     printf("Enter the elements:\n");
-    root=createtree(n);
-    printf("Root element is printed and we traverse down to left child\n")
+    root=createtree();
+    printf("Root element is printed and we traverse down to left child followed by right child\n");
     display(root);
     return 0;
 }
