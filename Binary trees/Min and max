@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node{
+    int data;
+    struct node* right;
+    struct node* left;
+}node;
+node* createtree(){
+    node*temp=NULL;
+    node*p=NULL;
+    node* root=NULL;
+    // int i=0;
+    while(5){
+        temp=(node*)malloc(sizeof(node));
+        scanf("%d",&temp->data);
+        if(temp->data==-1)  return  root;
+        temp->right=NULL;
+        temp->left=NULL;
+        if(root==NULL)  root=temp;
+        else{
+            p=root;
+            while(5){
+                if(temp->data>p->data){
+                    if(p->right==NULL)  {p->right=temp; break;}
+                    else    p=p->right;
+                }
+                else{
+                    if(p->left==NULL)  {p->left=temp; break;}
+                    else    p=p->left;
+                }
+                
+            }
+        }
+    }
+    return  root;
+}
+void display(node* root){
+    node* p=root;
+    while(p->left!=NULL)    p=p->left;
+    printf("Min: %d\n",p->data);
+    p=root;
+    while(p->right!=NULL)    p=p->right;
+    printf("Max: %d\n",p->data);
+}
+int main(){
+    
+    node* root=NULL;
+    printf("Input -1 to end the element input\n");
+    printf("Enter the elements:\n");
+    root=createtree();
+    display(root);
+    return 0;
+}
